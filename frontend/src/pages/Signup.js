@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { BACKEND_URL } from "../config";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -65,7 +66,7 @@ function Signup() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`, {
+      const response = await fetch(`${BACKEND_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

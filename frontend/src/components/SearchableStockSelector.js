@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { ML_API_URL } from '../config';
 
 function SearchableStockSelector({ selectedStock, onStockChange, className = "" }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,7 +28,7 @@ function SearchableStockSelector({ selectedStock, onStockChange, className = "" 
     setError(null);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_ML_API_URL}/api/search-stocks?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`${ML_API_URL}/api/search-stocks?q=${encodeURIComponent(query)}`);
 
       if (!response.ok) {
         throw new Error('Failed to search stocks');
