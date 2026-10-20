@@ -416,5 +416,6 @@ def get_country_from_exchange(exchange):
 if __name__ == '__main__':
     if not os.path.exists('reports'):
         os.makedirs('reports')
-    app.run(debug=True, port=5002)
+    port = int(os.getenv('PORT', 5002))
+    app.run(host='0.0.0.0', port=port)
 
