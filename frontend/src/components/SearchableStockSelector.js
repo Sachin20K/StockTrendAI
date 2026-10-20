@@ -27,7 +27,7 @@ function SearchableStockSelector({ selectedStock, onStockChange, className = "" 
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:5002/api/search-stocks?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`${import.meta.env.VITE_ML_API_URL}/api/search-stocks?q=${encodeURIComponent(query)}`);
 
       if (!response.ok) {
         throw new Error('Failed to search stocks');

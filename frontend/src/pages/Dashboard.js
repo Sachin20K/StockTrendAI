@@ -43,7 +43,7 @@ function SearchableStockSelector({ selectedStock, onStockChange, className = "" 
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:5002/api/search-stocks?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`${import.meta.env.VITE_ML_API_URL}/api/search-stocks?q=${encodeURIComponent(query)}`);
       if (!response.ok) throw new Error('Failed to search stocks');
       const data = await response.json();
       setSearchResults(data.stocks || []);
@@ -163,7 +163,7 @@ function Dashboard() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:5002/api/predict', {
+      const response = await fetch(`${import.meta.env.VITE_ML_API_URL}/api/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ticker: selectedStock, end_date: selectedDate }),
@@ -185,7 +185,7 @@ function Dashboard() {
     setChartLoading(true);
     setChartError(null);
     try {
-      const response = await fetch('http://localhost:5002/api/chart-data', {
+      const response = await fetch(`${import.meta.env.VITE_ML_API_URL}/api/chart-data`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ticker: selectedStock, chart_type: selectedChart, end_date: selectedDate }),
@@ -206,7 +206,7 @@ function Dashboard() {
   const handleGenerateHeatmap = async () => {
     setHeatmapLoading(true);
     try {
-      const response = await fetch('http://localhost:5002/api/heatmap-image', {
+      const response = await fetch(`${import.meta.env.VITE_ML_API_URL}/api/heatmap-image`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ticker: selectedStock, end_date: selectedDate }),
@@ -443,7 +443,7 @@ function Dashboard() {
     setChatInput('');
     setIsChatLoading(true);
     try {
-      const response = await fetch('http://localhost:5002/api/chatbot', {
+      const response = await fetch(`${import.meta.env.VITE_ML_API_URL}/api/chatbot`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: userMessage }),
