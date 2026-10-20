@@ -9,7 +9,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors({ origin: process.env.FRONTEND_URL || '*', credentials: true }));
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow all origins (reflection) so mobile browsers, localhost, and deployed frontend can connect
+    callback(null, true);
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes

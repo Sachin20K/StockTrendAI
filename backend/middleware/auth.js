@@ -12,7 +12,8 @@ const auth = (req, res, next) => {
 
   try {
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const jwtSecret = process.env.JWT_SECRET || 'stocktrendai_default_secret_jwt_key_2026';
+    const decoded = jwt.verify(token, jwtSecret);
     
     // Find user
     const user = User.findById(decoded.userId);

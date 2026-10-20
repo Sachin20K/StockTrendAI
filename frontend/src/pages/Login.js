@@ -77,6 +77,7 @@ function Login() {
         setErrors({ submit: data.message || 'Login failed' });
       }
     } catch (error) {
+      console.error('Login error:', error);
       setErrors({ submit: 'Network error. Please try again.' });
     } finally {
       setIsLoading(false);

@@ -93,6 +93,7 @@ function Signup() {
         setErrors({ submit: data.message || 'Signup failed' });
       }
     } catch (error) {
+      console.error('Signup error:', error);
       setErrors({ submit: 'Network error. Please try again.' });
     } finally {
       setIsLoading(false);

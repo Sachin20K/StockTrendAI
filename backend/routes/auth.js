@@ -6,6 +6,7 @@ const User = require('../models/User');
 const auth = require('../middleware/auth');
 
 const router = express.Router();
+const JWT_SECRET = process.env.JWT_SECRET || 'stocktrendai_default_secret_jwt_key_2026';
 
 // @route   POST /api/auth/signup
 // @desc    Register a new user
@@ -49,7 +50,7 @@ router.post('/signup', [
       email: user.email
     };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
 
     res.status(201).json({
       message: 'User created successfully',
@@ -104,7 +105,7 @@ router.post('/login', [
       email: user.email
     };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
 
     res.json({
       message: 'Login successful',
